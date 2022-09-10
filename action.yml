@@ -1,0 +1,16 @@
+name: MoSCoW Pull Request Prioritization
+description: 'MoSCoW Prioritization action to manage label-based requirements prioritization'
+author: 'grevend'
+
+branding:
+  icon: 'check-circle'
+  color: 'gray-dark'
+
+inputs:
+  token:
+    description: 'The workflows GITHUB_TOKEN secret'
+    required: true
+
+runs:
+  using: 'node16'
+  main: 'dist/index.js'

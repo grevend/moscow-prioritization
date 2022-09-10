@@ -1,0 +1,35 @@
+{
+  "name": "moscow-prioritization",
+  "version": "1.0.0",
+  "description": "MoSCoW Prioritization action to manage label-based requirements prioritization",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "tsc && ncc build lib/action.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/grevend/moscow-prioritization.git"
+  },
+  "keywords": [
+    "github",
+    "actions",
+    "label",
+    "MoSCoW",
+    "prioritization"
+  ],
+  "author": "grevend",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/grevend/moscow-prioritization/issues"
+  },
+  "homepage": "https://github.com/grevend/moscow-prioritization#readme",
+  "dependencies": {
+    "@actions/core": "^1.9.1",
+    "@actions/github": "^5.0.3"
+  },
+  "devDependencies": {
+    "typescript": "^4.8.2",
+    "@vercel/ncc": "^0.34.0"
+  }
+}
