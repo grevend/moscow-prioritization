@@ -10,6 +10,22 @@ inputs:
   token:
     description: 'The workflows GITHUB_TOKEN secret'
     required: true
+  wont-have-label:
+    description: 'Label to expect on low-priority PRs'
+    required: false
+    default: 'wont have'
+  could-have-label:
+    description: 'Label to expect on PRs of little relevance'
+    required: false
+    default: 'could have'
+  should-have-label:
+    description: 'Label to expect on non-critical PRs'
+    required: false
+    default: 'should have'
+  must-have-label:
+    description: 'Label to expect on essential PRs'
+    required: false
+    default: 'must have'
 
 runs:
   using: 'node16'

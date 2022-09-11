@@ -1,11 +1,11 @@
-name: Mark stale issues and pull requests
+name: Stale Marker
 
 on:
   schedule:
   - cron: '0 0 * * *'
 
 jobs:
-  stale:
+  check:
     runs-on: ubuntu-latest
     permissions:
       issues: write
