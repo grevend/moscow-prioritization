@@ -53,9 +53,8 @@ const labels = [
 const token = core.getInput('token', { required: true });
 const octo = gh.getOctokit(token);
 (async () => {
-    var _a, _b, _c;
     try {
-        const prNum = (_c = (_b = (_a = gh === null || gh === void 0 ? void 0 : gh.context) === null || _a === void 0 ? void 0 : _a.payload) === null || _b === void 0 ? void 0 : _b.pull_request) === null || _c === void 0 ? void 0 : _c.number;
+        const prNum = gh?.context?.payload?.pull_request?.number;
         if (!prNum) {
             core.info('This action only works on pull requests!');
             return;
