@@ -19,5 +19,6 @@ jobs:
         env:
           VALIDATE_ALL_CODEBASE: false
           FILTER_REGEX_EXCLUDE: '(/dist/|/lib/|/node_modules/)'
+          VALIDATE_TYPESCRIPT_STANDARD: false
           DEFAULT_BRANCH: 'main'
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
