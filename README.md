@@ -8,16 +8,16 @@ MoSCoW prioritization action to manage label-based requirements prioritization
 name: MoSCoW Prioritization
 
 on:
-  pull_request:
-    types: [labeled, opened, unlabeled, reopened]
   pull_request_target:
     types: [labeled, opened, unlabeled, reopened]
+    
+permissions:
+  contents: read
+  issues: write
+  pull-requests: write
 
 jobs:
   check:
-    permissions:
-      contents: read
-      pull-requests: write
     runs-on: ubuntu-latest
     steps:
       - uses: grevend/moscow-prioritization@v1.0.0
@@ -26,3 +26,13 @@ jobs:
 ```
 
 _Note: This action requires access to the `GITHUB_TOKEN` to call GitHub's REST API_
+
+### All options
+
+Input | Description | Default
+--- | --- | ---
+token | The workflows `GITHUB_TOKEN` secret |
+wont-have-label | Label to expect on low-priority PRs | `wont have`
+could-have-label | Label to expect on PRs of little relevance | `could have`
+should-have-label | Label to expect on non-critical PRs | `should have`
+must-have-label | Label to expect on essential PRs | `must have`

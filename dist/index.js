@@ -39,11 +39,17 @@ const help = `# MoSCoW Prioritization
 Prioritization | Explanation
 --- | ---
 Must Have | Essential and non-negotiable requirements for the project.
-Should Have | Not critical to the success of the project, but of high relevance. Should be taken into account in the project implementation, as long as no impairment of must requirements occurs.
+Should Have | Not critical to the success of the project but of high relevance. Should be taken into account in the project implementation, as long as no impairment of must requirements occurs.
 Could Have | Of little relevance and is only taken into account if there is still capacity in addition to the requirements for must and should.
-Won't Have (this time) | Low priority for the current planning stage, but will be prioritized again for the next release.
+Won't Have (this time) | Low priority for the current planning stage but will be prioritized again for the next release.
 `;
 const complete = 'Excellent, the MoSCoW prioritization is finished! :label:';
+const labels = [
+    core.getInput('wont-have-label', { required: false }),
+    core.getInput('could-have-label', { required: false }),
+    core.getInput('should-have-label', { required: false }),
+    core.getInput('must-have-label', { required: false })
+];
 const token = core.getInput('token', { required: true });
 const octo = gh.getOctokit(token);
 (async () => {
@@ -57,20 +63,12 @@ const octo = gh.getOctokit(token);
         const { data: pr } = await octo.rest.pulls.get({
             ...gh.context.repo, pull_number: prNum
         });
-        const hasLabel = pr.labels.some(({ name: label }) => {
-            switch (label) {
-                case "Wont Have":
-                case "Could Have":
-                case "Should Have":
-                case "Must Have":
-                    return true;
-                default:
-                    return false;
-            }
+        const exists = pr.labels.some(label => {
+            labels.includes(label.name);
         });
         await octo.rest.issues.createComment({
             ...gh.context.repo, issue_number: prNum,
-            body: hasLabel ? complete : help
+            body: exists ? complete : help
         });
     }
     catch (error) {
