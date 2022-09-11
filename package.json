@@ -31,5 +31,12 @@
   "devDependencies": {
     "typescript": "^4.8.2",
     "@vercel/ncc": "^0.34.0"
+  },
+  "ts-standard": {
+    "project": "tsconfig.json",
+    "ignore": [
+      "dist",
+      "lib"
+    ]
   }
 }
