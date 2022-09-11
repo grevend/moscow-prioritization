@@ -44,30 +44,22 @@ Could Have | Of little relevance and is only taken into account if there is stil
 Won't Have (this time) | Low priority for the current planning stage but will be prioritized again for the next release.
 `;
 const complete = 'Excellent, the MoSCoW prioritization is finished! :label:';
-const labels = [
-    core.getInput('wont-have-label', { required: false }),
-    core.getInput('could-have-label', { required: false }),
-    core.getInput('should-have-label', { required: false }),
-    core.getInput('must-have-label', { required: false })
-];
+const labels = [core.getInput('wont-have-label', { required: false }), core.getInput('could-have-label', { required: false }), core.getInput('should-have-label', { required: false }), core.getInput('must-have-label', { required: false })];
 const token = core.getInput('token', { required: true });
 const octo = gh.getOctokit(token);
-(async () => {
+(async function () {
     try {
         const prNum = gh?.context?.payload?.pull_request?.number;
-        if (!prNum) {
+        if (prNum === undefined) {
             core.info('This action only works on pull requests!');
             return;
         }
         const { data: pr } = await octo.rest.pulls.get({
             ...gh.context.repo, pull_number: prNum
         });
-        const exists = pr.labels.some(label => {
-            labels.includes(label.name);
-        });
+        const exists = pr.labels.some(label => labels.includes(label.name));
         await octo.rest.issues.createComment({
-            ...gh.context.repo, issue_number: prNum,
-            body: exists ? complete : help
+            ...gh.context.repo, issue_number: prNum, body: exists ? complete : help
         });
     }
     catch (error) {
