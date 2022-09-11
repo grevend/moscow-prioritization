@@ -9,8 +9,12 @@ name: MoSCoW Prioritization
 
 on:
   pull_request_target:
-    types: [labeled, opened, unlabeled, reopened]
-    
+    types: [ labeled, opened, unlabeled, reopened ]
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.head_ref }}
+  cancel-in-progress: true
+
 permissions:
   contents: read
   issues: write
@@ -20,9 +24,9 @@ jobs:
   check:
     runs-on: ubuntu-latest
     steps:
-      - uses: grevend/moscow-prioritization@v1.0.0
+      - uses: grevend/moscow-prioritization@v1.1.0
         with:
-          token: "${{ secrets.GITHUB_TOKEN }}"
+          token: '${{ secrets.GITHUB_TOKEN }}'
 ```
 
 _Note: This action requires access to the `GITHUB_TOKEN` to call GitHub's REST API_
