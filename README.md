@@ -17,8 +17,8 @@ concurrency:
 
 permissions:
   contents: read
-  issues: write
-  pull-requests: write
+  issues: read
+  pull-requests: read
 
 jobs:
   check:
@@ -33,11 +33,11 @@ _Note: This action requires access to the `GITHUB_TOKEN` to call GitHub's REST A
 
 ### All options
 
-Input | Description | Default
---- | --- | ---
-token | The workflows `GITHUB_TOKEN` secret |
-wont-have-label | Label to expect on low-priority PRs | `wont have`
-could-have-label | Label to expect on PRs of little relevance | `could have`
-should-have-label | Label to expect on non-critical PRs | `should have`
-must-have-label | Label to expect on essential PRs | `must have`
-fail-if-missing-label | Unprioritized PRs should fail the action | `true`
+Input | Description | Default | Availability
+--- | --- | --- | ---
+token | The workflows `GITHUB_TOKEN` secret | | `>v1.0.0`
+wont-have-label | Label to expect on low-priority PRs | `wont have` | `>v1.1.0`
+could-have-label | Label to expect on PRs of little relevance | `could have` | `>v1.1.0`
+should-have-label | Label to expect on non-critical PRs | `should have` | `>v1.1.0`
+must-have-label | Label to expect on essential PRs | `must have` | `>v1.1.0`
+fail-if-missing-label | Unprioritized PRs should fail the action | `true` | `deprecated`

@@ -26,10 +26,6 @@ inputs:
     description: 'Label to expect on essential PRs'
     required: false
     default: 'must have'
-  fail-if-missing-label:
-    description: 'Unprioritized PRs should fail the action'
-    required: false
-    default: 'true'
 
 runs:
   using: 'node16'
