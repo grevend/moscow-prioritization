@@ -7,7 +7,7 @@ MoSCoW prioritization action to manage label-based requirements prioritization
 ```yml
 name: MoSCoW Prioritization
 
-on: 
+on:
   pull_request_target:
     types: [ labeled, opened, unlabeled, reopened ]
 
