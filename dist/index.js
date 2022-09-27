@@ -45,7 +45,7 @@ Won't Have (this time) | Low priority for the current planning stage but will be
 `;
 const complete = 'Excellent, the MoSCoW prioritization is finished! :label:';
 const labels = [core.getInput('wont-have-label'), core.getInput('could-have-label'), core.getInput('should-have-label'), core.getInput('must-have-label')];
-const octo = gh.getOctokit(core.getInput('token', { required: true }));
+const octo = gh.getOctokit(core.getInput('token'));
 (async function () {
     try {
         const prNum = gh?.context?.payload?.pull_request?.number;

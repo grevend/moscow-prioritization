@@ -7,13 +7,7 @@ MoSCoW prioritization action to manage label-based requirements prioritization
 ```yml
 name: MoSCoW Prioritization
 
-on:
-  pull_request_target:
-    types: [ labeled, opened, unlabeled, reopened ]
-
-concurrency:
-  group: ${{ github.workflow }}-${{ github.head_ref }}
-  cancel-in-progress: true
+on: pull_request_target
 
 permissions:
   contents: read
@@ -24,9 +18,7 @@ jobs:
   check:
     runs-on: ubuntu-latest
     steps:
-      - uses: grevend/moscow-prioritization@v1.2.0
-        with:
-          token: '${{ secrets.GITHUB_TOKEN }}'
+      - uses: grevend/moscow-prioritization@v2.0.0
 ```
 
 _Note: This action requires access to the `GITHUB_TOKEN` to call GitHub's REST API_
@@ -35,7 +27,7 @@ _Note: This action requires access to the `GITHUB_TOKEN` to call GitHub's REST A
 
 Input | Description | Default | Availability
 --- | --- | --- | ---
-token | The workflows `GITHUB_TOKEN` secret | | `>v1.0.0`
+token | The workflows `GITHUB_TOKEN` secret | `${{ github.token }}` | `>v1.0.0`
 wont-have-label | Label to expect on low-priority PRs | `wont have` | `>v1.1.0`
 could-have-label | Label to expect on PRs of little relevance | `could have` | `>v1.1.0`
 should-have-label | Label to expect on non-critical PRs | `should have` | `>v1.1.0`
