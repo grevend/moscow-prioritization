@@ -37,6 +37,8 @@ const octo = gh.getOctokit(token);
       ...gh.context.repo, issue_number: prNum, body: exists ? complete : help
     })
 
+    await core.summary.addRaw(exists ? complete : help).write()
+
     if (!exists && fails) {
       core.setFailed('The associated pull request is currently unprioritized!')
     }
