@@ -40,3 +40,4 @@ wont-have-label | Label to expect on low-priority PRs | `wont have`
 could-have-label | Label to expect on PRs of little relevance | `could have`
 should-have-label | Label to expect on non-critical PRs | `should have`
 must-have-label | Label to expect on essential PRs | `must have`
+fail-if-missing-label | Unprioritized PRs should fail the action | `true`

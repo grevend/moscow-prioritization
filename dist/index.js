@@ -44,7 +44,8 @@ Could Have | Of little relevance and is only taken into account if there is stil
 Won't Have (this time) | Low priority for the current planning stage but will be prioritized again for the next release.
 `;
 const complete = 'Excellent, the MoSCoW prioritization is finished! :label:';
-const labels = [core.getInput('wont-have-label', { required: false }), core.getInput('could-have-label', { required: false }), core.getInput('should-have-label', { required: false }), core.getInput('must-have-label', { required: false })];
+const labels = [core.getInput('wont-have-label'), core.getInput('could-have-label'), core.getInput('should-have-label'), core.getInput('must-have-label')];
+const fails = core.getInput('fail-if-missing-label') === 'true';
 const token = core.getInput('token', { required: true });
 const octo = gh.getOctokit(token);
 (async function () {
@@ -61,6 +62,9 @@ const octo = gh.getOctokit(token);
         await octo.rest.issues.createComment({
             ...gh.context.repo, issue_number: prNum, body: exists ? complete : help
         });
+        if (!exists && fails) {
+            core.setFailed('The associated pull request is currently unprioritized!');
+        }
     }
     catch (error) {
         core.error(error);
@@ -1145,8 +1149,9 @@ exports.context = new Context.Context();
  * @param     token    the repo PAT or GITHUB_TOKEN
  * @param     options  other options to set
  */
-function getOctokit(token, options) {
-    return new utils_1.GitHub(utils_1.getOctokitOptions(token, options));
+function getOctokit(token, options, ...additionalPlugins) {
+    const GitHubWithPlugins = utils_1.GitHub.plugin(...additionalPlugins);
+    return new GitHubWithPlugins(utils_1.getOctokitOptions(token, options));
 }
 exports.getOctokit = getOctokit;
 //# sourceMappingURL=github.js.map
