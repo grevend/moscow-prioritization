@@ -24,7 +24,7 @@ jobs:
   check:
     runs-on: ubuntu-latest
     steps:
-      - uses: grevend/moscow-prioritization@v1.1.0
+      - uses: grevend/moscow-prioritization@v1.2.0
         with:
           token: '${{ secrets.GITHUB_TOKEN }}'
 ```
