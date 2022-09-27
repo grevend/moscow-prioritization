@@ -45,24 +45,20 @@ Won't Have (this time) | Low priority for the current planning stage but will be
 `;
 const complete = 'Excellent, the MoSCoW prioritization is finished! :label:';
 const labels = [core.getInput('wont-have-label'), core.getInput('could-have-label'), core.getInput('should-have-label'), core.getInput('must-have-label')];
-const fails = core.getInput('fail-if-missing-label') === 'true';
-const token = core.getInput('token', { required: true });
-const octo = gh.getOctokit(token);
+const octo = gh.getOctokit(core.getInput('token'));
 (async function () {
     try {
         const prNum = gh?.context?.payload?.pull_request?.number;
         if (prNum === undefined) {
-            core.info('This action only works on pull requests!');
+            core.notice('This action only works on pull requests!');
             return;
         }
         const { data: pr } = await octo.rest.pulls.get({
             ...gh.context.repo, pull_number: prNum
         });
         const exists = pr.labels.some(label => labels.includes(label.name));
-        await octo.rest.issues.createComment({
-            ...gh.context.repo, issue_number: prNum, body: exists ? complete : help
-        });
-        if (!exists && fails) {
+        await core.summary.addRaw(exists ? complete : help).write();
+        if (!exists) {
             core.setFailed('The associated pull request is currently unprioritized!');
         }
     }
