@@ -1,0 +1,14 @@
+name: Check branch convention usage
+on: push
+
+jobs:
+  branching:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v3
+      - name: Check the branch convention usage
+        uses: duart38/branch-convention-check@v1.0.1
+        with:
+          standard_branch_check: '(\b(?:fix|feat|ci|patch)\b(-([0-9])+|)\b(?:-[a-z]{3,})+\b)'
+          ignore: 'main'
