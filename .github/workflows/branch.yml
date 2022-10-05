@@ -11,4 +11,5 @@ jobs:
         uses: duart38/branch-convention-check@v2.0.0
         with:
           standard_branch_check: '(\b(?:fix|feat|ci|patch)\b(-([0-9])+|)\b(?:-[a-z]{3,})+\b)'
+          ignore_branch_check: '(dependabot\/.*)'
           ignore: 'main'
