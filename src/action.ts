@@ -35,8 +35,12 @@ const octo = gh.getOctokit(core.getInput('token'));
     if (!exists) {
       core.setFailed('The associated pull request is currently unprioritized!')
     }
-  } catch (error: any) {
-    core.error(error)
-    core.setFailed(error.message)
+  } catch (error: unknown) {
+    if (error instanceof Error) {
+      core.error(error)
+      core.setFailed(error.message)
+    } else {
+      core.setFailed('An unexpected error occurred!')
+    }
   }
 })()
