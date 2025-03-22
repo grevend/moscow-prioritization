@@ -20,7 +20,7 @@ jobs:
   check:
     runs-on: ubuntu-latest
     steps:
-      - uses: grevend/moscow-prioritization@v2.0.0
+      - uses: grevend/moscow-prioritization@v2.0.2
 ```
 
 _Note: This action requires access to the `GITHUB_TOKEN` to call GitHub's REST API_
