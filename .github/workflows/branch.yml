@@ -1,5 +1,5 @@
 name: Check branch convention usage
-on: 
+on:
   pull_request:
     types: [opened, reopened]
 
@@ -14,4 +14,4 @@ jobs:
         with:
           standard_branch_check: '(\b(?:fix|feat|ci|patch)\b(-([0-9])+|)\b(?:-[a-z]{3,})+\b)'
           ignore_branch_check: '(dependabot\/.*)'
-          ignore: 'main'
+          ignore: "main"

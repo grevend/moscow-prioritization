@@ -2,7 +2,7 @@ name: MoSCoW Prioritization
 
 on:
   pull_request_target:
-    types: [ labeled, opened, unlabeled, reopened ]
+    types: [labeled, opened, unlabeled, reopened]
 
 permissions:
   contents: read
