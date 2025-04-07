@@ -35,7 +35,7 @@
     "@vercel/ncc": "^0.38.3",
     "eslint": "^9.24.0",
     "globals": "^16.0.0",
-    "typescript": "^5.8.2",
+    "typescript": "^5.8.3",
     "typescript-eslint": "^8.29.0"
   }
 }
